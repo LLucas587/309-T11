@@ -65,8 +65,8 @@ export const AuthProvider = ({ children }) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: username, password: password })
         });
-        if (!res.ok) return data.message;
         const data = await res.json();
+        if (!res.ok) return data.message;
         localStorage.setItem('token', data.token);
         const userMe = await fetch(`${BACKEND_URL}/user/me`, {
             headers: { 'Authorization': `Bearer ${data.token}` }
